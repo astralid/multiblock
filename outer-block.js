@@ -1,10 +1,45 @@
+ /*
+  *	Outer Block:
+  *		A Gutenberg editor block that can have an id attribute and inner blocks.
+  */
 ( function( blocks, element, editor, components) {
     var el = element.createElement;
     var RichText = editor.RichText;
- 
-    blocks.registerBlockType( 'multi-block/multi-block', {
-        title: 'MultiBlock',
-        icon: 'universal-access-alt',
+	let icon = el('svg', {
+		width: 24,
+		height: 24,
+		viewBox: '0 0 24 24'
+		}, [
+			el('rect', {
+				x:1, y:1,
+				width:22,
+				height:22,
+				rx:1,
+				stroke: 'black',
+				fill: 'none'
+			}),
+			el('rect', {
+				x: 4, y: 4,
+				width: 16,
+				height: 6,
+				rx: 1,
+				stroke: 'black',
+				fill: 'none'
+			}),
+			el('rect', {
+				x: 4, y: 14,
+				width: 16,
+				height: 6,
+				rx: 1,
+				stroke: 'black',
+				fill: 'none'
+			})
+		]
+	);
+    blocks.registerBlockType( 'jh-blocks/outer-block', {
+        title: 'Outer Block',
+		description: 'A simple block with an id attribute and inner blocks.',
+        icon: icon,
         category: 'layout',
         example: {},
 		
@@ -19,16 +54,16 @@
 		
         edit: function( props ) {
             return el('div', { className: props.className }, [
-				el(editor.InnerBlocks, {}),
 				el(
 					components.TextControl,
 					{	value: props.attributes.id,
-						onChange: function( val ){
-							props.setAttributes({ id: val });
+						onChange: function( v ){
+							props.setAttributes({ id: v });
 						},
 						placeholder: 'id'
 					}
-				)
+				),
+				el(editor.InnerBlocks, {})
             ]);
         },
 		

@@ -1,6 +1,4 @@
-.wp-block-multi-block-multi-block {
-    color: darkred;
-    background: #fcc;
-    border: 2px solid #c99;
-    padding: 20px;
+.wp-block-jh-blocks-outer-block {
+    border: 2px solid #999;
+    padding: 0.5em;
 }
